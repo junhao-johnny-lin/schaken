@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/pieces">
+        <file>image_resources/black_square.png</file>
+        <file>image_resources/BlackBishop.png</file>
+        <file>image_resources/BlackKing.png</file>
+        <file>image_resources/BlackKnight.png</file>
+        <file>image_resources/BlackPawn.png</file>
+        <file>image_resources/BlackQueen.png</file>
+        <file>image_resources/BlackRook.png</file>
+        <file>image_resources/white_square.png</file>
+        <file>image_resources/WhiteBishop.png</file>
+        <file>image_resources/WhiteKing.png</file>
+        <file>image_resources/WhiteKnight.png</file>
+        <file>image_resources/WhitePawn.png</file>
+        <file>image_resources/WhiteQueen.png</file>
+        <file>image_resources/WhiteRook.png</file>
+    </qresource>
+</RCC>
