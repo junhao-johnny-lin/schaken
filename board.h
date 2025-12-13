@@ -2,31 +2,38 @@
 #define BOARD_H
 
 #include <QPoint>
+#include <array>
 
 namespace Chess {
-class Piece; // forward
+
+class Piece;
 
 class Board {
 public:
     static constexpr int SIZE = 8;
 
     Board();
+    Board(const Board& other);                  // deep copy constructor
+    Board& operator=(const Board& other);       // deep copy assignment
     ~Board();
 
     bool isInside(const QPoint &pos) const;
     bool isEmpty(const QPoint &pos) const;
     Piece* pieceAt(const QPoint &pos) const;
     void setPieceAt(const QPoint &pos, Piece* piece);
-    bool movePiece(const QPoint &from, const QPoint &to); // returns true if move executed
 
-    bool hasEnemyAt(const QPoint &pos, Chess::Piece* piece) const; // convenience
-    bool hasEnemyAt(const QPoint &pos, int color) const; // overload using color enum integer
+    bool movePiece(const QPoint &from, const QPoint &to);
+
+    bool hasEnemyAt(const QPoint &pos, Piece* piece) const;
+    bool hasEnemyAt(const QPoint &pos, int color) const;
 
     void clear();
-    void setupInitialPosition(); // place starting pieces
+    void setupInitialPosition();
 
 private:
     Piece* m_grid[SIZE][SIZE];
+
+    Piece* clonePiece(const Piece* p) const;   // helper for deep copy
 };
 
 } // namespace Chess

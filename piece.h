@@ -1,9 +1,10 @@
 #ifndef PIECE_H
 #define PIECE_H
 
+#include <cmath>
 #include <QPoint>
-#include <vector.h>
-#include <cmath.h>
+#include <vector>
+
 
 namespace Chess {
 

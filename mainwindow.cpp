@@ -7,28 +7,30 @@
 #include <QFile>
 
 // zorg dat pad/naam van resources overeenkomt met jouw qrc of map
-static const QString PIECE_PATH = ":/pieces/"; // als je resources.qrc gebruikt
+//static const QString PIECE_PATH = ":/pieces/"; // als je resources.qrc gebruikt
+static const QString PIECE_PATH = ":/pieces/image_resources/";
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
     ui(new Ui::MainWindow),
     m_scene(new QGraphicsScene(this)),
-    m_controller(this) // parent for QObject
+    m_controller(/*this*/) // parent for QObject
 {
     ui->setupUi(this);
 
     // set scene to view
     ui->boardView->setScene(m_scene);
-    ui->boardView->setFixedSize(BOARD_PIXELS + 2, BOARD_PIXELS + 2);
+    ui->boardView->setFixedSize(BOARD_PIXELS + 10, BOARD_PIXELS + 10);
     m_scene->setSceneRect(0, 0, BOARD_PIXELS, BOARD_PIXELS);
 
     // setup visuals
     setupBoardGraphics();
 
     // connect controller signals
-    connect(&m_controller, &GameController::boardUpdated, this, &MainWindow::handleBoardUpdated);
-    connect(&m_controller, &GameController::selectionChanged, this, &MainWindow::handleSelectionChanged);
-    connect(&m_controller, &GameController::movesChanged, this, &MainWindow::handleMovesChanged);
+   // connect(&m_controller, &GameController::boardUpdated, this, &MainWindow::handleBoardUpdated);
+  //  connect(&m_controller, &GameController::selectionChanged, this, &MainWindow::handleSelectionChanged);
+    //connect(&m_controller, &GameController::movesChanged, this, &MainWindow::handleMovesChanged);
 
     // initial paint from controller (constructed with setupInitialPosition)
     refreshBoardGraphics();
@@ -78,6 +80,7 @@ void MainWindow::onSquareClicked(const QPoint& pos)
 {
     // pass to controller
     m_controller.handleSquareClick(pos);
+     refreshBoardGraphics();
 }
 
 // refresh all piece images according to controller.board()
@@ -153,18 +156,24 @@ QPixmap MainWindow::piecePixmapForChar(char symbol)
 {
     // map symbols to filenames in your resources (:/pieces/). Use names like pawn_w.png, pawn_b.png etc.
     switch (symbol) {
-    case 'P': return QPixmap(PIECE_PATH + "pawn_w.png");
-    case 'p': return QPixmap(PIECE_PATH + "pawn_b.png");
-    case 'R': return QPixmap(PIECE_PATH + "rook_w.png");
-    case 'r': return QPixmap(PIECE_PATH + "rook_b.png");
-    case 'N': return QPixmap(PIECE_PATH + "knight_w.png");
-    case 'n': return QPixmap(PIECE_PATH + "knight_b.png");
-    case 'B': return QPixmap(PIECE_PATH + "bishop_w.png");
-    case 'b': return QPixmap(PIECE_PATH + "bishop_b.png");
-    case 'Q': return QPixmap(PIECE_PATH + "queen_w.png");
-    case 'q': return QPixmap(PIECE_PATH + "queen_b.png");
-    case 'K': return QPixmap(PIECE_PATH + "king_w.png");
-    case 'k': return QPixmap(PIECE_PATH + "king_b.png");
+    case 'P': return QPixmap(PIECE_PATH + "WhitePawn.png");
+    case 'p': return QPixmap(PIECE_PATH + "BlackPawn.png");
+
+    case 'R': return QPixmap(PIECE_PATH + "WhiteRook.png");
+    case 'r': return QPixmap(PIECE_PATH + "BlackRook.png");
+
+    case 'N': return QPixmap(PIECE_PATH + "WhiteKnight.png");
+    case 'n': return QPixmap(PIECE_PATH + "BlackKnight.png");
+
+    case 'B': return QPixmap(PIECE_PATH + "WhiteBishop.png");
+    case 'b': return QPixmap(PIECE_PATH + "BlackBishop.png");
+
+    case 'Q': return QPixmap(PIECE_PATH + "WhiteQueen.png");
+    case 'q': return QPixmap(PIECE_PATH + "BlackQueen.png");
+
+    case 'K': return QPixmap(PIECE_PATH + "WhiteKing.png");
+    case 'k': return QPixmap(PIECE_PATH + "BlackKing.png");
+
     default: return QPixmap();
     }
 }
