@@ -34,6 +34,8 @@ private:
     QGraphicsScene* m_scene;
     GameController m_controller;
 
+    // Vraag 2: No globals — static constexpr gebruikt voor configuratie,
+    // geen globale variabelen buiten klassen
     static constexpr int TILE_SIZE = 80; // pas aan naar smaak
     static constexpr int BOARD_PIXELS = TILE_SIZE * Board::SIZE;
 

@@ -16,10 +16,9 @@ class Piece
 {
 public:
     Piece(Color color);
-    // OOP: Polymorfisme — validMoves is virtual en overridden
 
+    // Vraag 14: Polymorfisme #1 — validMoves is virtueel in Piece en overridden in alle stukken
     virtual ~Piece() = default;
-    // OOP: Inline function — symbol() is inline in header
 
     Color color() const { return m_color; }
     bool isWhite() const { return m_color == Color::White; }
@@ -28,6 +27,7 @@ public:
     virtual std::vector<QPoint> validMoves(const QPoint& pos,
                                            const Board& board) const = 0;
 
+    // Vraag 14: Polymorfisme #2 — symbol() is virtueel in Piece en overridden in alle stukken
     virtual char symbol() const = 0;
 
 protected:

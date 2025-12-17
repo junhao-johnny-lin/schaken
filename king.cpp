@@ -2,12 +2,13 @@
 #include "board.h"
 
 namespace Chess {
-
+// Vraag 12: Parameterized constructor #2 — King kan wit of zwart zijn
 King::King(Color color)
     : Piece(color)
 {
 }
 
+// Vraag 14: Polymorfisme — override validMoves van Piece
 std::vector<QPoint> King::validMoves(const QPoint& pos,
                                      const Board& board) const
 {

@@ -3,7 +3,7 @@
 
 namespace Chess {
 
-
+// Vraag 12: Parameterized constructor #1 — Pawn kan wit of zwart zijn
 Pawn::Pawn(Color color)
     : Piece(color)
 {

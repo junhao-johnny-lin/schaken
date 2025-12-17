@@ -9,8 +9,7 @@
 #include "king.h"
 
 namespace Chess {
-// OOP: Default constructor
-
+// Vraag 11: Default constructor #2
 Board::Board() {
     for (int y = 0; y < SIZE; ++y)
         for (int x = 0; x < SIZE; ++x)
@@ -18,6 +17,7 @@ Board::Board() {
 }
 
 Board::~Board() {
+    // Vraag 14: Destructor #2 — Board destructor ruimt dynamisch geheugen van alle stukken op
     clear();
 }
 
@@ -54,8 +54,7 @@ Piece* Board::clonePiece(const Piece* p) const {
 //     Deep Copy Constructor
 // --------------------------------
 
-// OOP: Copy constructor (deep copy)
-
+// Vraag 13: Copy constructor #1 — Board deep copy
 Board::Board(const Board& other) {
     for (int y = 0; y < SIZE; ++y) {
         for (int x = 0; x < SIZE; ++x) {

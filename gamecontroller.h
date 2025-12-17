@@ -20,7 +20,7 @@ class GameController
 {
 public:
     GameController();
-
+    GameController(const GameController& other);
     const Board& board() const { return m_board; }
     QPoint selectedSquare() const { return m_selected; }
     const std::vector<QPoint>& highlightedMoves() const { return m_moves; }
@@ -29,6 +29,7 @@ public:
     MoveResult handleSquareClick(const QPoint& pos);
 
 private:
+    // Vraag 3: Correct protections — interne spelstatus is private
     Board m_board;
     QPoint m_selected;
     std::vector<QPoint> m_moves;

@@ -1,3 +1,5 @@
+// Vraag 5: Separate header files — elke klasse heeft een eigen .h
+
 #include "gamecontroller.h"
 #include "queen.h"
 #include "rook.h"
@@ -6,13 +8,22 @@
 
 namespace Chess {
 
+// Vraag 11: Default constructor #1
 GameController::GameController()
+    // Vraag 15:member initialization in constructors (the stuff behind a colon)
     : m_selected(-1, -1),
       m_currentPlayer(Color::White)
 {
     m_board.setupInitialPosition();
 }
-
+// Vraag 13: Copy constructor #2 — GameController kopieert Board, selectie, moves en huidige speler
+GameController::GameController(const GameController& other)
+    : m_board(other.m_board),
+    m_selected(other.m_selected),
+    m_moves(other.m_moves),
+    m_currentPlayer(other.m_currentPlayer)
+{
+}
 void GameController::clearSelection()
 {
     m_selected = QPoint(-1, -1);
@@ -105,7 +116,7 @@ bool GameController::isLegalMove(Color color,
 /* ==============================
    SCHAAKMAT
    ============================== */
-
+// Vraag 4: Maintainability — duidelijke functienaam en
 bool GameController::isCheckmate(Color color)
 {
     if (!isKingInCheck(color))
