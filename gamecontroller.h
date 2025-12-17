@@ -6,6 +6,7 @@
 #include "board.h"
 #include "piece.h"
 
+
 namespace Chess {
 
 enum class MoveResult {
@@ -32,6 +33,11 @@ private:
     QPoint m_selected;
     std::vector<QPoint> m_moves;
     Color m_currentPlayer;
+
+    bool isLegalMove(Color color,
+                     const QPoint& from,
+                     const QPoint& to) const;
+
 
     void clearSelection();
     bool isKingInCheck(Color color) const;

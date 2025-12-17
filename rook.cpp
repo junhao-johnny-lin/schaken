@@ -40,6 +40,7 @@ std::vector<QPoint> Rook::validMoves(const QPoint& pos,
     };
 
     // four rook directions
+    // C++: Lambda functie gebruikt voor scan logic
     scanDir(1, 0);   // right
     scanDir(-1, 0);  // left
     scanDir(0, 1);   // down

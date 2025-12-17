@@ -9,6 +9,7 @@ class Bishop : public Piece
 {
 public:
     Bishop(Color color);
+    // C++: gebruik van container std::vector
 
     std::vector<QPoint> validMoves(const QPoint& pos,
                                    const Board& board) const override;

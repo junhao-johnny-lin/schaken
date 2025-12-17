@@ -29,16 +29,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     // connect controller signals
    // connect(&m_controller, &GameController::boardUpdated, this, &MainWindow::handleBoardUpdated);
-  //  connect(&m_controller, &GameController::selectionChanged, this, &MainWindow::handleSelectionChanged);
+   //connect(&m_controller, &GameController::selectionChanged, this, &MainWindow::handleSelectionChanged);
     //connect(&m_controller, &GameController::movesChanged, this, &MainWindow::handleMovesChanged);
 
     // initial paint from controller (constructed with setupInitialPosition)
     refreshBoardGraphics();
 }
 
+
 MainWindow::~MainWindow()
 {
-    delete ui;
+   delete ui;
 }
 
 // create 8x8 SquareItems and background colours

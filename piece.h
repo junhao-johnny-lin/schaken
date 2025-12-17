@@ -16,7 +16,10 @@ class Piece
 {
 public:
     Piece(Color color);
+    // OOP: Polymorfisme — validMoves is virtual en overridden
+
     virtual ~Piece() = default;
+    // OOP: Inline function — symbol() is inline in header
 
     Color color() const { return m_color; }
     bool isWhite() const { return m_color == Color::White; }

@@ -9,6 +9,7 @@
 #include "king.h"
 
 namespace Chess {
+// OOP: Default constructor
 
 Board::Board() {
     for (int y = 0; y < SIZE; ++y)
@@ -52,6 +53,9 @@ Piece* Board::clonePiece(const Piece* p) const {
 // --------------------------------
 //     Deep Copy Constructor
 // --------------------------------
+
+// OOP: Copy constructor (deep copy)
+
 Board::Board(const Board& other) {
     for (int y = 0; y < SIZE; ++y) {
         for (int x = 0; x < SIZE; ++x) {
@@ -121,6 +125,7 @@ bool Board::hasEnemyAt(const QPoint& pos, int color) const {
     Piece* o = pieceAt(pos);
     return o && (static_cast<int>(o->color()) != color);
 }
+// C++: dynamic memory Delete — memory cleanup
 
 void Board::clear() {
     for (int y = 0; y < SIZE; ++y)

@@ -3,6 +3,7 @@
 
 namespace Chess {
 
+
 Pawn::Pawn(Color color)
     : Piece(color)
 {
