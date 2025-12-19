@@ -9,6 +9,7 @@
 namespace Chess {
 
 // Vraag 11: Default constructor #1
+// Vraag 16: constructor forwarding
 GameController::GameController()
     // Vraag 15:member initialization in constructors (the stuff behind a colon)
     : m_selected(-1, -1),
@@ -24,6 +25,26 @@ GameController::GameController(const GameController& other)
     m_currentPlayer(other.m_currentPlayer)
 {
 }
+
+// Vraag 40: useful usage of threads — bereken mogelijke zetten in aparte thread
+void GameController::calculateAllMovesAsync(Color player, std::vector<QPoint>& outMoves)
+{
+    std::thread t([&]() {
+        outMoves.clear();
+
+        for (int y = 0; y < Board::SIZE; ++y) {
+            for (int x = 0; x < Board::SIZE; ++x) {
+                Piece* p = m_board.pieceAt(QPoint(x, y));
+                if (!p || p->color() != player) continue;
+
+                auto moves = p->validMoves(QPoint(x, y), m_board);
+                outMoves.insert(outMoves.end(), moves.begin(), moves.end());
+            }
+        }
+    });
+    t.join(); // wacht tot thread klaar is
+}
+
 void GameController::clearSelection()
 {
     m_selected = QPoint(-1, -1);
@@ -33,7 +54,7 @@ void GameController::clearSelection()
 /* ==============================
    SCHAAK CONTROLE
    ============================== */
-
+// Vraag 19: useful member function — check of koning schaak staat
 bool GameController::isKingInCheck(Color color) const
 {
     QPoint kingPos(-1, -1);
@@ -116,7 +137,7 @@ bool GameController::isLegalMove(Color color,
 /* ==============================
    SCHAAKMAT
    ============================== */
-// Vraag 4: Maintainability — duidelijke functienaam en
+// Vraag 5: Maintainability — duidelijke functienaam en
 bool GameController::isCheckmate(Color color)
 {
     if (!isKingInCheck(color))
@@ -160,7 +181,8 @@ void GameController::promotePawn(const QPoint &pos)
 /* ==============================
    INPUT AFHANDELING
    ============================== */
-
+// Vraag 22: useful setter
+// Vraag 33: useful (modern) call-by-references
 MoveResult GameController::handleSquareClick(const QPoint& pos)
 {
     Piece* clicked = m_board.pieceAt(pos);

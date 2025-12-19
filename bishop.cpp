@@ -17,6 +17,7 @@ std::vector<QPoint> Bishop::validMoves(const QPoint& pos,
     int y = pos.y();
 
     // Helper voor diagonaal scannen
+    // Vraag 39: useful usage of lambda function
     auto scanDir = [&](int dx, int dy) {
         int cx = x + dx;
         int cy = y + dy;

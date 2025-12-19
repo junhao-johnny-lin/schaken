@@ -20,10 +20,12 @@ public:
     // Vraag 14: Polymorfisme #1 — validMoves is virtueel in Piece en overridden in alle stukken
     virtual ~Piece() = default;
 
+    // Vraag 23: correct usage of inline function
     Color color() const { return m_color; }
     bool isWhite() const { return m_color == Color::White; }
 
     // Must be implemented by each piece
+    // Vraag 17: virtual function — polymorfisme
     virtual std::vector<QPoint> validMoves(const QPoint& pos,
                                            const Board& board) const = 0;
 
@@ -31,6 +33,7 @@ public:
     virtual char symbol() const = 0;
 
 protected:
+    // Vraag3: correct protections — protected zodat subclasses dit kunnen gebruiken
     Color m_color;
 };
 

@@ -8,6 +8,8 @@
 
 // zorg dat pad/naam van resources overeenkomt met jouw qrc of map
 //static const QString PIECE_PATH = ":/pieces/"; // als je resources.qrc gebruikt
+// Vraag 34: useful string class usage
+// Vraag 37: useful usage of (modern) file-I/O
 static const QString PIECE_PATH = ":/pieces/image_resources/";
 
 
@@ -63,6 +65,7 @@ void MainWindow::setupBoardGraphics()
             m_squares[r][c] = s;
 
             // connect clicks
+            // Vraag 18: useful usage of "this"
             connect(s, &SquareItem::clicked, this, &MainWindow::onSquareClicked);
 
             // create empty pixmap item for pieces (stacked above squares)
@@ -153,28 +156,37 @@ void MainWindow::handleSelectionChanged() { highlightSelectionAndMoves(); }
 void MainWindow::handleMovesChanged() { highlightSelectionAndMoves(); }
 
 // helper to choose image file based on piece symbol
+// Vraag 38: useful exception handling
 QPixmap MainWindow::piecePixmapForChar(char symbol)
 {
+     QPixmap px;
     // map symbols to filenames in your resources (:/pieces/). Use names like pawn_w.png, pawn_b.png etc.
     switch (symbol) {
-    case 'P': return QPixmap(PIECE_PATH + "WhitePawn.png");
-    case 'p': return QPixmap(PIECE_PATH + "BlackPawn.png");
+     case 'P':  px =  QPixmap(PIECE_PATH + "WhitePawn.png");break;
+     case 'p':  px =  QPixmap(PIECE_PATH + "BlackPawn.png");break;
 
-    case 'R': return QPixmap(PIECE_PATH + "WhiteRook.png");
-    case 'r': return QPixmap(PIECE_PATH + "BlackRook.png");
+     case 'R':  px =  QPixmap(PIECE_PATH + "WhiteRook.png");break;
+     case 'r':  px =  QPixmap(PIECE_PATH + "BlackRook.png");break;
 
-    case 'N': return QPixmap(PIECE_PATH + "WhiteKnight.png");
-    case 'n': return QPixmap(PIECE_PATH + "BlackKnight.png");
+     case 'N':  px =  QPixmap(PIECE_PATH + "WhiteKnight.png");break;
+     case 'n':  px =   QPixmap(PIECE_PATH + "BlackKnight.png");break;
 
-    case 'B': return QPixmap(PIECE_PATH + "WhiteBishop.png");
-    case 'b': return QPixmap(PIECE_PATH + "BlackBishop.png");
+     case 'B':  px =  QPixmap(PIECE_PATH + "WhiteBishop.png");break;
+     case 'b':  px =  QPixmap(PIECE_PATH + "BlackBishop.png");break;
 
-    case 'Q': return QPixmap(PIECE_PATH + "WhiteQueen.png");
-    case 'q': return QPixmap(PIECE_PATH + "BlackQueen.png");
+     case 'Q':  px =  QPixmap(PIECE_PATH + "WhiteQueen.png");break;
+     case 'q':  px =  QPixmap(PIECE_PATH + "BlackQueen.png");break;
 
-    case 'K': return QPixmap(PIECE_PATH + "WhiteKing.png");
-    case 'k': return QPixmap(PIECE_PATH + "BlackKing.png");
+     case 'K':  px =  QPixmap(PIECE_PATH + "WhiteKing.png");break;
+     case 'k':  px =  QPixmap(PIECE_PATH + "BlackKing.png");break;
 
     default: return QPixmap();
+        break;
     }
+    if (px.isNull()) {
+        // exception handling: afbeelding niet gevonden
+        throw std::runtime_error("Failed to load piece image for symbol: " + std::string(1, symbol));
+    }
+
+    return px;
 }

@@ -47,6 +47,7 @@ Piece* Board::clonePiece(const Piece* p) const {
     case 'k': return new King(Color::Black);
     }
 
+    //vraag 36: useful usage of nullptr
     return nullptr;
 }
 
@@ -79,12 +80,16 @@ Board& Board::operator=(const Board& other) {
 
     return *this;
 }
+// Vraag 20: default values in function definition
 
-bool Board::isInside(const QPoint& pos) const {
-    int x = pos.x(), y = pos.y();
-    return x >= 0 && x < SIZE && y >= 0 && y < SIZE;
+bool Board::isInside(const QPoint& pos, int size) const
+{
+    int x = pos.x();
+    int y = pos.y();
+    return x >= 0 && x < size && y >= 0 && y < size;
 }
 
+// Vraag 19: useful member function
 bool Board::isEmpty(const QPoint& pos) const {
     return isInside(pos) && (m_grid[pos.y()][pos.x()] == nullptr);
 }
@@ -93,7 +98,7 @@ Piece* Board::pieceAt(const QPoint& pos) const {
     if (!isInside(pos)) return nullptr;
     return m_grid[pos.y()][pos.x()];
 }
-
+// Vraag 30: useful (modern) call-by-references
 void Board::setPieceAt(const QPoint& pos, Piece* piece) {
     if (!isInside(pos)) return;
     m_grid[pos.y()][pos.x()] = piece;
@@ -124,16 +129,17 @@ bool Board::hasEnemyAt(const QPoint& pos, int color) const {
     Piece* o = pieceAt(pos);
     return o && (static_cast<int>(o->color()) != color);
 }
-// C++: dynamic memory Delete — memory cleanup
 
 void Board::clear() {
     for (int y = 0; y < SIZE; ++y)
         for (int x = 0; x < SIZE; ++x) {
+            // Vraag 32: dynamic memory removing
             delete m_grid[y][x];
             m_grid[y][x] = nullptr;
         }
 }
 
+//vraag 31: dynamic memory allocation (new)
 void Board::setupInitialPosition() {
     clear();
 

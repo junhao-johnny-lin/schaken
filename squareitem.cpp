@@ -13,6 +13,7 @@ SquareItem::SquareItem(int col, int row, qreal size, QGraphicsItem* parent)
 void SquareItem::mousePressEvent(QGraphicsSceneMouseEvent* event)
 {
     Q_UNUSED(event);
+    // Vraag 41: useful Qt class
     emit clicked(QPoint(m_col, m_row));
     QGraphicsRectItem::mousePressEvent(event);
 }

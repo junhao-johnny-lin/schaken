@@ -8,6 +8,7 @@ namespace Chess {
 class Queen : public Piece
 {
 public:
+    // Vraag 12: parameterized constructor
     Queen(Color color);
 
     std::vector<QPoint> validMoves(const QPoint& pos,

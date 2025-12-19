@@ -8,6 +8,7 @@ namespace Chess {
 class Pawn : public Piece
 {
 public:
+    // Vraag 12: parameterized constructor
     Pawn(Color color);
 
     std::vector<QPoint> validMoves(const QPoint& pos,

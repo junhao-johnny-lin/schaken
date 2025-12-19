@@ -5,20 +5,31 @@
 #include <QPoint>
 #include <array>
 
+// Vraag 26: alles zit in een zelfgemaakte namespace (Chess)
 namespace Chess {
 
 class Piece;
 
 class Board {
+     // Vraag 25: useful friend class
+  friend class GameController;
 public:
-    static constexpr int SIZE = 8;
+    // Vraag 2: no globals — SIZE is static binnen de klasse i.p.v. globale variabele
+    // Vraag 27: memory-efficient type
+    static constexpr unsigned char SIZE = 8;
 
+    // Vraag 11: default constructor
     Board();
     Board(const Board& other);                  // deep copy constructor
     Board& operator=(const Board& other);       // deep copy assignment
     ~Board();
 
-    bool isInside(const QPoint &pos) const;
+    // Vraag 21: default values in function definition
+    //vraag 28: const references for variables
+//vraag 29:const references for functions
+    bool isInside(const QPoint &pos, int size = SIZE) const;
+
+    // Vraag 30:useful bool
     bool isEmpty(const QPoint &pos) const;
     Piece* pieceAt(const QPoint &pos) const;
     void setPieceAt(const QPoint &pos, Piece* piece);

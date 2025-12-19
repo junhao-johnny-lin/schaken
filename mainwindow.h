@@ -40,6 +40,7 @@ private:
     static constexpr int BOARD_PIXELS = TILE_SIZE * Board::SIZE;
 
     // store pointers to square items and piece pixmaps
+    // Vraag 24: useful template class
     std::array<std::array<SquareItem*, 8>, 8> m_squares;
     std::array<std::array<QGraphicsPixmapItem*, 8>, 8> m_pieceItems;
 
